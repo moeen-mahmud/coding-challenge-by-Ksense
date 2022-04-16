@@ -1,0 +1,9 @@
+body {
+  box-sizing: border-box;
+  background-color: #fbfbfb;
+}
+
+.main-container {
+  background-color: #ffffff !important;
+  min-height: 100vh;
+}
