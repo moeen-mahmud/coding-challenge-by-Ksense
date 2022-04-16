@@ -28,9 +28,9 @@
       <!-- Main wrapper -->
       <main id="table-contained" class="mt-5 px-5">
         <!-- Table container -->
-        <table id="data-table" class="table table-light">
+        <table id="data-table" class="table table-light table-hover">
           <thead>
-            <tr>
+            <tr class="text-center">
               <th scope="col">#</th>
               <th scope="col">Name</th>
               <th scope="col">Email</th>
@@ -50,7 +50,9 @@
           >
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">User Posts</h5>
+                <h5 class="modal-title">
+                  <span id="selectedUser"></span>'s posts
+                </h5>
                 <button
                   type="button"
                   class="btn-close"
