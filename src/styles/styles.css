@@ -7,3 +7,8 @@ body {
   background-color: #ffffff !important;
   min-height: 100vh;
 }
+
+.subtitle {
+  margin-top: -10px;
+  margin-left: 2rem;
+}
