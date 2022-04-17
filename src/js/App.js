@@ -6,10 +6,16 @@ const modalContainer = document.getElementById("modal-container");
 
 // Fetch all the users from the api
 const fetchUser = async () => {
+  dataTable.innerHTML = `
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="spinner-grow" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  `;
   try {
     const response = await fetch(usersEndpoint);
     const data = await response.json();
-    console.log(data);
     displayUsers(data);
   } catch (err) {
     console.log(err.message);
@@ -18,6 +24,15 @@ const fetchUser = async () => {
 
 // Show posts for a selected user
 const showFilteredPost = async (userId) => {
+  modalContainer.innerHTML = `
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="spinner-grow" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  `;
+  selectedUser.innerText = "Loading...";
+
   try {
     const postEndpoint = `https://jsonplaceholder.typicode.com/posts?userId=${userId}`;
     const filteredUserEndpoint = `https://jsonplaceholder.typicode.com/users/${userId}`;
@@ -28,25 +43,24 @@ const showFilteredPost = async (userId) => {
     const responseForUser = await fetch(filteredUserEndpoint);
     const filteredUserData = await responseForUser.json();
 
-    console.log(postData);
-    console.log(filteredUserData.name);
     displayUserPosts(postData);
-    selectedUser.innerText = filteredUserData.name;
+    selectedUser.innerText = `${filteredUserData.name}'s posts`;
   } catch (err) {
     console.log(err.message);
   }
 };
 
+// Displaying all the users
 const displayUsers = (users) => {
+  dataTable.textContent = "";
   if (users?.length !== 0) {
     users?.forEach((user) => {
       const userId = user?.id;
       const userFullName = user?.name;
       const userEmail = user?.email;
 
-      const tableBody = document.createElement("tbody");
+      const tableBody = document.createElement("tr");
       tableBody.innerHTML = `
-        <tr class="text-center">
           <th scope="row">${userId}</th>
           <td>${userFullName}</td>
           <td>${userEmail}</td>
@@ -60,15 +74,16 @@ const displayUsers = (users) => {
               See Posts
             </button>
           </td>
-        </tr>
       `;
-
+      tableBody.classList.add("text-center");
       dataTable.appendChild(tableBody);
     });
   }
 };
 
 const displayUserPosts = (posts) => {
+  modalContainer.textContent = "";
+  selectedUser.textContent = "";
   if (posts?.length !== 0) {
     posts?.forEach((post) => {
       const postTitle = post?.title;
@@ -76,7 +91,7 @@ const displayUserPosts = (posts) => {
 
       const postsDivisions = document.createElement("div");
       postsDivisions.innerHTML = `
-        <div class="p-3 rounded border mb-3" >
+        <div class="p-3 rounded border mb-3">
           <h4>${postTitle}</h4>
           <p class="mb-2 text-secondary">${postBody}</p>
         </div>

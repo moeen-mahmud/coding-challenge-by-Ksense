@@ -16,7 +16,7 @@
     <title>Coding Challenge by Ksense</title>
   </head>
   <body>
-    <div class="container-md main-container">
+    <div class="container-lg main-container">
       <!-- Header -->
       <header
         class="d-flex flex-column justify-content-center my-3 align-items-center"
@@ -26,9 +26,9 @@
       </header>
 
       <!-- Main wrapper -->
-      <main id="table-contained" class="mt-5 px-5">
+      <main id="table-container" class="mt-3">
         <!-- Table container -->
-        <table id="data-table" class="table table-light table-hover">
+        <table class="table table-light table-hover table-responsive">
           <thead>
             <tr class="text-center">
               <th scope="col">#</th>
@@ -37,6 +37,7 @@
               <th scope="col">Action</th>
             </tr>
           </thead>
+          <tbody id="data-table"></tbody>
         </table>
         <!-- Modal -->
         <div
@@ -50,9 +51,7 @@
           >
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">
-                  <span id="selectedUser"></span>'s posts
-                </h5>
+                <h5 class="modal-title" id="selectedUser"></h5>
                 <button
                   type="button"
                   class="btn-close"
